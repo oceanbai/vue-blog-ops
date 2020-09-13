@@ -42,7 +42,6 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
-
   {
     path: '/',
     component: Layout,
@@ -51,10 +50,53 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '主页', icon: 'dashboard' }
     }]
   },
-
+  {
+    path: '/article',
+    component: Layout,
+    redirect: '/article/articlemanage',
+    name: 'Article',
+    meta: {
+      title: '文章管理',
+      icon: 'nested'
+    },
+    children: [
+      {
+        path: 'articlemanage',
+        name: 'ArticleManage',
+        component: () => import('@/views/article/articleManage'),
+        meta: { title: '文章列表', icon: 'form' }
+      },
+      {
+        path: 'articlesort',
+        name: 'ArticleSort',
+        component: () => import('@/views/article/articleSort'),
+        meta: { title: '文章分类', icon: 'tree' }
+      },
+      {
+        path: 'articletag',
+        name: 'ArticleTag',
+        component: () => import('@/views/article/articleTag'),
+        meta: { title: '文章标签', icon: 'link' }
+      },
+      {
+        path: 'addarticletag',
+        name: 'AddArticleTag',
+        hidden: true,
+        component: () => import('@/views/article/addArticleTag'),
+        meta: { title: '新增标签', icon: 'link' }
+      },
+      {
+        path: 'editarticletag/:id',
+        name: 'EditArticleTag',
+        hidden: true,
+        component: () => import('@/views/article/addArticleTag'),
+        meta: { title: '编辑标签', icon: 'link' }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
